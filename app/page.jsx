@@ -4,16 +4,15 @@ import AIShowcase from '../components/AIShowcase';
 import HeroAsk from '../components/HeroAsk';
 import DayStory from '../components/DayStory';
 import SolutionsCarousel from '../components/SolutionsCarousel';
+import OneRecord from '../components/OneRecord';
+import BeforeAfter from '../components/BeforeAfter';
+import CountUp from '../components/CountUp';
+import SiteHeader from '../components/SiteHeader';
+import SiteFooter from '../components/SiteFooter';
+import { Btn } from '../components/ui';
+import { PRODUCTS, FAQ, CONTACT } from '../lib/content';
 
 /* ---------- CONTENT (edit here). Items marked VERIFY need approved, substantiated claims before launch. ---------- */
-const PRODUCTS = [
-  ['EHR', 'Tailorable documentation and complete records for every specialty.'],
-  ['Telemedicine', 'Live and virtual visits built into one workflow.'],
-  ['Practice Management', 'Scheduling and billing that help you collect what you’re owed, faster.'],
-  ['Patient Engagement', 'Stay connected with patients beyond the encounter.'],
-  ['AI Automation', 'Ambient documentation and coding assist.'],
-  ['Reporting & Analytics', 'Real-time dashboards across all locations.'],
-];
 const STRENGTHS = [
   ['◉', 'One Record', 'A single patient record shared across clinics, labs and payers.'],
   ['✦', 'Ambient AI', 'Notes, coding and messages drafted for you. You stay in control.'],
@@ -27,10 +26,11 @@ const PILLARS = [
   ['Our Vision', 'To be the nationwide number one EHR, trusted by every hospital, insurer and practitioner.'],
   ['Our Values', 'One patient. One record. One ecosystem. Every decision starts there.'],
 ];
-const STATS = [ // VERIFY every figure
-  ['170K+', 'clinicians on the platform'],
-  ['2.5 hrs', 'saved per clinician, per day*'],
-  ['9', 'flagship health-system partners'],
+const VERIFIED = false; // flip to true ONLY after every figure below is verified: numbers then animate
+const STATS = [ // [number, decimals, suffix, label]
+  [170, 0, 'K+', 'clinicians on the platform'],
+  [2.5, 1, ' hrs', 'saved per clinician, per day*'],
+  [9, 0, '', 'flagship health-system partners'],
 ];
 const PARTNERS = ['Partner One', 'Partner Two', 'Partner Three', 'Partner Four', 'Partner Five', 'Partner Six']; // replace with approved logos
 const TRUST = ['HIPAA-aligned', 'SOC 2 (verify)', 'ONC-certified (verify)', '99.9% uptime (verify)'];
@@ -39,50 +39,13 @@ const ARTICLES = [
   ['Billing software every practice should know', 'Where clinical and financial workflows meet, and where they break.'],
   ['Choosing the right charting software', 'A short framework for evaluating documentation tools.'],
 ];
-const FAQ = [
-  ['How long does implementation take?', 'Most practices go live in weeks, not months. We map your workflows, migrate your data, train your team and stay on call at go-live.'],
-  ['Can you migrate our existing records?', 'Yes. We import patient, scheduling and billing data from your current system and validate it with you before launch.'],
-  ['Is OneRxiv secure and HIPAA compliant?', 'Security is built in: encryption, role-based access and audit logging. Ask us for our current compliance documentation.'],
-  ['Which specialties do you support?', 'Primary care, behavioral health, pain and spine, and multi-location groups, with templates you can tailor.'],
-  ['Does the AI replace the clinician?', 'No. Ambient AI drafts the note; the clinician reviews, edits and signs every one.'],
-];
 
-const Btn = ({ href, children, ghost }) => (
-  <a href={href} className={`inline-flex items-center justify-center rounded-full px-6 py-3.5 font-medium transition ${ghost ? 'border border-ink/20 bg-white hover:border-brand hover:text-brand' : 'bg-brand text-white shadow-lg shadow-brand/25 hover:bg-[#a90d26]'}`}>{children}</a>
-);
 
-const Wordmark = ({ className = '' }) => (
-  <span className={`font-display text-3xl font-bold tracking-tight text-ink ${className}`}>One<span className="text-brand">R</span>xiv</span>
-);
 
 export default function Home() {
   return (
     <>
-      {/* HEADER */}
-      <header className="sticky top-0 z-40 border-b border-blush-100 bg-white/90 backdrop-blur">
-        <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-5">
-          <a href="#top" aria-label="OneRxiv home"><Wordmark /></a>
-          <nav aria-label="Main" className="hidden items-center gap-5 text-[15px] md:flex lg:gap-7">
-            <div className="group relative">
-              <button className="py-5" aria-haspopup="true">Products</button>
-              <div className="invisible absolute left-1/2 top-full w-[34rem] -translate-x-1/2 rounded-3xl border border-blush-200 bg-white p-4 opacity-0 shadow-2xl transition group-focus-within:visible group-focus-within:opacity-100 group-hover:visible group-hover:opacity-100">
-                <ul className="grid grid-cols-2 gap-1">
-                  {PRODUCTS.map(([n, d]) => (
-                    <li key={n}><a href="#products" className="block rounded-2xl p-3 hover:bg-blush-50"><span className="font-medium">{n}</span><span className="mt-0.5 block text-sm text-slate2">{d}</span></a></li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-            <a href="#about" className="hover:text-brand">About</a>
-            <a href="#solutions" className="hover:text-brand">Solutions</a>
-            <a href="#journey" className="hover:text-brand">How it works</a>
-            <a href="#ai" className="hover:text-brand">AI</a>
-            <a href="#stories" className="hover:text-brand">Customers</a>
-            <a href="#resources" className="hover:text-brand">Resources</a>
-          </nav>
-          <div className="flex items-center gap-3"><a href="#contact" className="hidden text-sm hover:text-brand sm:block">Log in</a><Btn href="#contact">Schedule a demo</Btn></div>
-        </div>
-      </header>
+      <SiteHeader />
 
       <main id="main">
         {/* HERO */}
@@ -92,7 +55,7 @@ export default function Home() {
               One patient.<br />One record.<br /><span className="text-brand">One ecosystem.</span>
             </h1>
             <p className="mt-6 max-w-xl text-lg text-slate2">OneRxiv brings your EHR, telemedicine, billing and AI documentation into a single closed loop, so your team spends its day on patients, not on software.</p>
-            <div className="mt-8 flex flex-wrap gap-3"><Btn href="#contact">Schedule a demo</Btn><Btn href="#contact" ghost>Chat with sales</Btn></div>
+            <div className="mt-8 flex flex-wrap gap-3"><Btn href="/contact">Schedule a demo</Btn><Btn href="/contact" ghost>Chat with sales</Btn></div>
             <HeroAsk />
             <p className="mt-6 text-sm text-slate2">Built for primary care, behavioral health, pain and spine, and multi-location groups.</p>
           </div>
@@ -110,9 +73,12 @@ export default function Home() {
             </div>
           </div>
           <dl className="mx-auto mt-10 grid max-w-4xl gap-6 px-5 text-center sm:grid-cols-3">
-            {STATS.map(([v, l]) => (<div key={l}><dt className="font-display text-4xl font-semibold text-brand">{v}</dt><dd className="mt-1 text-sm text-slate2">{l}</dd></div>))}
+            {STATS.map(([v, d, sfx, l]) => (<div key={l}><dt className="font-display text-4xl font-semibold text-brand"><CountUp to={v} decimals={d} suffix={sfx} verified={VERIFIED} /></dt><dd className="mt-1 text-sm text-slate2">{l}</dd></div>))}
           </dl>
         </section>
+
+        {/* ONE RECORD (scroll animation) */}
+        <OneRecord />
 
         {/* ABOUT */}
         <section id="about" className="mx-auto max-w-7xl px-5 py-20 lg:py-28">
@@ -159,6 +125,13 @@ export default function Home() {
           <Journey />
         </section>
 
+        {/* BEFORE / AFTER */}
+        <section className="mx-auto max-w-7xl px-5 py-20 lg:py-28">
+          <h2 className="mx-auto max-w-3xl text-center font-display text-4xl font-semibold sm:text-5xl">From disconnected to connected</h2>
+          <p className="mx-auto mb-10 mt-4 max-w-xl text-center text-lg text-slate2">Drag the slider to compare a practice before and after OneRxiv.</p>
+          <BeforeAfter />
+        </section>
+
         {/* SOLUTIONS CAROUSEL */}
         <section id="solutions" className="mx-auto max-w-7xl px-5 py-20 lg:py-28">
           <h2 className="mx-auto max-w-3xl text-center font-display text-4xl font-semibold sm:text-5xl">Solutions for every healthcare organization</h2>
@@ -172,7 +145,7 @@ export default function Home() {
             <h2 className="max-w-2xl font-display text-4xl font-semibold sm:text-5xl">Every product, one click away</h2>
             <ul className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
               {PRODUCTS.map(([n, d]) => (
-                <li key={n}><a href="#contact" className="group block h-full rounded-3xl border border-blush-200 bg-white p-7 transition hover:border-brand hover:shadow-xl">
+                <li key={n}><a href="/contact" className="group block h-full rounded-3xl border border-blush-200 bg-white p-7 transition hover:border-brand hover:shadow-xl">
                   <span className="mb-5 grid h-11 w-11 place-items-center rounded-2xl bg-blush-100 font-display text-lg text-brand">{n[0]}</span>
                   <h3 className="text-xl font-semibold">{n}</h3><p className="mt-2 text-slate2">{d}</p>
                   <span className="mt-5 inline-block font-medium text-brand group-hover:underline">Explore {n}</span>
@@ -206,38 +179,24 @@ export default function Home() {
         </section>
 
         {/* FAQ */}
-        <section className="mx-auto max-w-3xl px-5 pb-20 lg:pb-28">
+        <section id="faq" className="mx-auto max-w-3xl px-5 pb-20 lg:pb-28">
           <h2 className="font-display text-4xl font-semibold">Questions practices ask us</h2>
           <div className="mt-8 divide-y divide-blush-200 border-y border-blush-200">
             {FAQ.map(([q, a]) => (<details key={q} className="group py-5"><summary className="flex cursor-pointer list-none justify-between gap-4 text-lg font-medium">{q}<span className="text-brand transition group-open:rotate-45">+</span></summary><p className="mt-3 text-slate2">{a}</p></details>))}
           </div>
         </section>
 
-        {/* CTA + FORM */}
-        <section id="contact" className="bg-gradient-to-br from-blush-100 to-blush-200 py-20 lg:py-28">
-          <div className="mx-auto grid max-w-6xl items-center gap-12 px-5 lg:grid-cols-2">
-            <div><h2 className="font-display text-4xl font-semibold sm:text-5xl">See OneRxiv run your practice</h2>
-              <p className="mt-4 max-w-md text-lg text-ink/70">A 30-minute walkthrough tailored to your specialty. No obligation.</p></div>
-            <form action="/api/demo" method="post" className="space-y-4 rounded-3xl bg-white p-7 shadow-xl">
-              {[['name', 'Full name', 'text'], ['email', 'Work email', 'email'], ['role', 'Your role', 'text']].map(([id, l, t]) => (
-                <label key={id} className="block text-sm font-medium">{l}<input name={id} type={t} required className="mt-1.5 w-full rounded-xl border border-blush-300 px-4 py-3 font-normal" /></label>))}
-              <label className="block text-sm font-medium">Practice size
-                <select name="size" className="mt-1.5 w-full rounded-xl border border-blush-300 bg-white px-4 py-3 font-normal"><option>1–5 providers</option><option>6–25 providers</option><option>26+ providers</option></select></label>
-              <button className="w-full rounded-full bg-brand py-3.5 font-medium text-white hover:bg-[#a90d26]">Book my demo</button>
-              <p className="text-xs text-slate2">Please don’t include patient information. We’ll only use your details to arrange the demo.</p>
-            </form>
+        {/* CTA */}
+        <section className="bg-gradient-to-br from-blush-100 to-blush-200 py-20 text-center lg:py-28">
+          <div className="mx-auto max-w-3xl px-5">
+            <h2 className="font-display text-4xl font-semibold sm:text-5xl">See OneRxiv run your practice</h2>
+            <p className="mx-auto mt-4 max-w-md text-lg text-ink/70">A 30-minute walkthrough tailored to your organization. No obligation.</p>
+            <div className="mt-8 flex flex-wrap justify-center gap-3"><Btn href="/contact">Contact our team</Btn><Btn href={`mailto:${CONTACT.email}`} ghost>{CONTACT.email}</Btn></div>
           </div>
         </section>
       </main>
 
-      {/* FOOTER */}
-      <footer id="footer" className="border-t border-blush-100 py-12">
-        <div className="mx-auto flex max-w-7xl flex-col justify-between gap-8 px-5 md:flex-row">
-          <div><Wordmark /><p className="mt-3 text-sm text-slate2">One patient. One record. One ecosystem.</p></div>
-          <nav aria-label="Footer" className="flex flex-wrap gap-x-8 gap-y-2 text-sm"><a href="#about">About</a><a href="#solutions">Solutions</a><a href="#products">Products</a><a href="#journey">How it works</a><a href="#resources">Resources</a><a href="#">Careers</a><a href="#">Privacy</a><a href="#">Terms</a><a href="#contact">Contact</a></nav>
-        </div>
-        <p className="mx-auto mt-8 max-w-7xl px-5 text-xs text-slate2">*Based on customer-reported results. © {new Date().getFullYear()} OneRxiv. All rights reserved.</p>
-      </footer>
+      <SiteFooter />
     </>
   );
 }
