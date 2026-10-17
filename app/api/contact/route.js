@@ -170,8 +170,8 @@ export default function Home() {
           </div>
         </section>
 
-        {/* RESOURCES */}
-        <section id="resources" className="mx-auto max-w-7xl px-5 py-20 lg:py-28">
+        {/* Blogs */}
+        <section id="Blogs" className="mx-auto max-w-7xl px-5 py-20 lg:py-28">
           <h2 className="font-display text-4xl font-semibold sm:text-5xl">Stay updated with our latest insights</h2>
           <ul className="mt-10 grid gap-5 md:grid-cols-3">
             {ARTICLES.map(([t, d]) => (<li key={t}><a href="#" className="block h-full rounded-3xl bg-blush-50 p-7 hover:bg-blush-100"><div className="mb-6 aspect-video rounded-2xl bg-gradient-to-br from-blush-200 to-white" /><h3 className="text-lg font-semibold">{t}</h3><p className="mt-2 text-slate2">{d}</p></a></li>))}

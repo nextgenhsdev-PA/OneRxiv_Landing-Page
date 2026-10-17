@@ -3,7 +3,7 @@ import CommandPalette from './CommandPalette';
 import { Btn, Wordmark } from './ui';
 import { PRODUCTS, FAQ } from '../lib/content';
 
-const NAV = [['About', '/#about'], ['Solutions', '/#solutions'], ['How it works', '/#journey'], ['AI', '/#ai'], ['Customers', '/#stories'], ['Resources', '/#resources'], ['Contact', '/contact']];
+const NAV = [['About', '/#about'], ['Solutions', '/#solutions'], ['How it works', '/#journey'], ['AI', '/#ai'], ['Customers', '/#stories'], ['Blogs', '/#Blogs'], ['Contact', '/contact']];
 
 export default function SiteHeader() {
   return (

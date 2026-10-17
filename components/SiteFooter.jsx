@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { Wordmark } from './ui';
 import { CONTACT } from '../lib/content';
 
-const LINKS = [['About', '/#about'], ['Solutions', '/#solutions'], ['Products', '/#products'], ['How it works', '/#journey'], ['Resources', '/#resources'], ['Contact', '/contact'], ['Careers', '#'], ['Privacy', '#'], ['Terms', '#']];
+const LINKS = [['About', '/#about'], ['Solutions', '/#solutions'], ['Products', '/#products'], ['How it works', '/#journey'], ['Blogs', '/#Blogs'], ['Contact', '/contact'], ['Careers', '#'], ['Privacy', '#'], ['Terms', '#']];
 
 export default function SiteFooter() {
   return (

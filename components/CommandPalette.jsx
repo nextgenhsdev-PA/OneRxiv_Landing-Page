@@ -1,7 +1,7 @@
 'use client';
 import { useEffect, useMemo, useRef, useState } from 'react';
 
-const PAGES = [['About', '#about'], ['Solutions', '#solutions'], ['How it works', '#journey'], ['AI', '#ai'], ['Customers', '#stories'], ['Resources', '#resources'], ['FAQ', '#faq'], ['Contact us', '/contact']];
+const PAGES = [['About', '#about'], ['Solutions', '#solutions'], ['How it works', '#journey'], ['AI', '#ai'], ['Customers', '#stories'], ['Blogs', '#Blogs'], ['FAQ', '#faq'], ['Contact us', '/contact']];
 
 export default function CommandPalette({ products = [], faqs = [] }) {
   const [open, setOpen] = useState(false);
