@@ -6,10 +6,13 @@ import DayStory from '../components/DayStory';
 import SolutionsCarousel from '../components/SolutionsCarousel';
 import OneRecord from '../components/OneRecord';
 import BeforeAfter from '../components/BeforeAfter';
-import CountUp from '../components/CountUp';
+import ChallengeFinder from '../components/ChallengeFinder';
 import SiteHeader from '../components/SiteHeader';
 import SiteFooter from '../components/SiteFooter';
 import { Btn } from '../components/ui';
+import AgentRoster from '../components/AgentRoster';
+import { POSTS } from '../lib/posts';
+import { slugOf } from '../lib/products';
 import { PRODUCTS, FAQ, CONTACT } from '../lib/content';
 
 /* ---------- CONTENT (edit here). Items marked VERIFY need approved, substantiated claims before launch. ---------- */
@@ -26,14 +29,16 @@ const PILLARS = [
   ['Our Vision', 'To be the nationwide number one EHR, trusted by every hospital, insurer and practitioner.'],
   ['Our Values', 'One patient. One record. One ecosystem. Every decision starts there.'],
 ];
-const VERIFIED = false; // flip to true ONLY after every figure below is verified: numbers then animate
-const STATS = [ // [number, decimals, suffix, label]
-  [170, 0, 'K+', 'clinicians on the platform'],
-  [2.5, 1, ' hrs', 'saved per clinician, per day*'],
-  [9, 0, '', 'flagship health-system partners'],
+const AUDIENCES = [
+  ['Hospitals', 'Connect every department on one shared record.'],
+  ['Insurance companies', 'Receive clean, structured data from providers.'],
+  ['Private practitioners', 'Chart faster and keep patients connected.'],
 ];
-const PARTNERS = ['Partner One', 'Partner Two', 'Partner Three', 'Partner Four', 'Partner Five', 'Partner Six']; // replace with approved logos
-const TRUST = ['HIPAA-aligned', 'SOC 2 (verify)', 'ONC-certified (verify)', '99.9% uptime (verify)'];
+const PLAN = [ // TODO: confirm this plan with your delivery team
+  ['Day 30', 'Lay the foundation', ['Map your workflows and systems', 'Migrate records and set up users', 'Train a pilot group']],
+  ['Day 60', 'Activate your teams', ['Go live with pilot teams', 'Connect labs, billing and insurers', 'Tune templates to your specialty']],
+  ['Day 90', 'Scale with confidence', ['Roll out to every team', 'Review results against your goals', 'Plan your next modules']],
+];
 const ARTICLES = [
   ['Managing a modern practice', 'What day-to-day operations look like with an integrated EHR.'],
   ['Billing software every practice should know', 'Where clinical and financial workflows meet, and where they break.'],
@@ -62,19 +67,19 @@ export default function Home() {
           <HeroVideo />
         </section>
 
-        {/* SOCIAL PROOF */}
-        <section aria-label="Trusted by" className="border-y border-blush-100 bg-blush-50 py-10">
-          <p className="mb-6 text-center text-sm text-slate2">Trusted by healthcare organizations worldwide</p>
-          <div className="marquee overflow-hidden" aria-label="Partner logos">
-            <div className="marquee-track flex w-max gap-6">
-              {[...PARTNERS, ...PARTNERS].map((p, n) => (
-                <div key={n} aria-hidden={n >= PARTNERS.length} className="grid h-14 w-44 place-items-center rounded-xl border border-blush-200 bg-white text-sm text-slate2">{p}</div>
-              ))}
-            </div>
-          </div>
-          <dl className="mx-auto mt-10 grid max-w-4xl gap-6 px-5 text-center sm:grid-cols-3">
-            {STATS.map(([v, d, sfx, l]) => (<div key={l}><dt className="font-display text-4xl font-semibold text-brand"><CountUp to={v} decimals={d} suffix={sfx} verified={VERIFIED} /></dt><dd className="mt-1 text-sm text-slate2">{l}</dd></div>))}
-          </dl>
+        {/* BUILT FOR */}
+        <section aria-label="Who OneRxiv is built for" className="border-y border-blush-100 bg-blush-50 py-12">
+          <p className="mb-8 text-center text-sm text-slate2">One platform for every part of the care ecosystem</p>
+          <ul className="mx-auto grid max-w-5xl gap-5 px-5 sm:grid-cols-3">
+            {AUDIENCES.map(([t, d]) => (<li key={t}><a href="/#solutions" className="block h-full rounded-3xl border border-blush-200 bg-white p-6 transition hover:border-brand"><h3 className="text-lg font-semibold">{t}</h3><p className="mt-1 text-slate2">{d}</p></a></li>))}
+          </ul>
+        </section>
+
+        {/* CHALLENGE FINDER */}
+        <section className="mx-auto max-w-7xl px-5 py-20 lg:py-28">
+          <h2 className="max-w-2xl font-display text-4xl font-semibold sm:text-5xl">What’s your biggest challenge?</h2>
+          <p className="mb-10 mt-4 max-w-xl text-lg text-slate2">Pick the one that sounds most like your day and see how OneRxiv helps.</p>
+          <ChallengeFinder />
         </section>
 
         {/* ONE RECORD (scroll animation) */}
@@ -145,7 +150,7 @@ export default function Home() {
             <h2 className="max-w-2xl font-display text-4xl font-semibold sm:text-5xl">Every product, one click away</h2>
             <ul className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
               {PRODUCTS.map(([n, d]) => (
-                <li key={n}><a href="/contact" className="group block h-full rounded-3xl border border-blush-200 bg-white p-7 transition hover:border-brand hover:shadow-xl">
+                <li key={n}><a href={`/products/${slugOf(n)}`} className="group block h-full rounded-3xl border border-blush-200 bg-white p-7 transition hover:border-brand hover:shadow-xl">
                   <span className="mb-5 grid h-11 w-11 place-items-center rounded-2xl bg-blush-100 font-display text-lg text-brand">{n[0]}</span>
                   <h3 className="text-xl font-semibold">{n}</h3><p className="mt-2 text-slate2">{d}</p>
                   <span className="mt-5 inline-block font-medium text-brand group-hover:underline">Explore {n}</span>
@@ -161,20 +166,38 @@ export default function Home() {
         {/* AI */}
         <section id="ai" className="mx-auto max-w-7xl px-5 py-20 lg:py-28"><AIShowcase /></section>
 
-        {/* TESTIMONIAL + TRUST */}
-        <section id="stories" className="bg-ink py-20 text-white lg:py-28">
-          <div className="mx-auto max-w-4xl px-5 text-center">
-            <blockquote className="font-display text-3xl leading-snug sm:text-4xl">“I was able to close 300 charts in three days because of how streamlined charting is.”</blockquote>
-            <p className="mt-6 text-white/70">Director of Health Information Systems, Pain &amp; Spine practice (VERIFY quote and permission)</p>
-            <ul className="mt-12 flex flex-wrap justify-center gap-3">{TRUST.map((t) => (<li key={t} className="rounded-full border border-white/20 px-4 py-2 text-sm">{t}</li>))}</ul>
+        <AgentRoster />
+
+        {/* FIRST 90 DAYS */}
+        <section className="bg-blush-50 py-20 lg:py-28">
+          <div className="mx-auto max-w-7xl px-5">
+            <h2 className="max-w-2xl font-display text-4xl font-semibold sm:text-5xl">Your first 90 days</h2>
+            <p className="mb-10 mt-4 max-w-xl text-lg text-slate2">A typical path from first call to results. We tailor it to your organization.</p>
+            <ol className="grid gap-5 md:grid-cols-3">
+              {PLAN.map(([d, t, items]) => (
+                <li key={d} className="rounded-3xl border border-blush-200 bg-white p-7">
+                  <span className="rounded-full bg-brand px-3 py-1 text-sm text-white">{d}</span>
+                  <h3 className="mt-4 text-xl font-semibold">{t}</h3>
+                  <ul className="mt-4 space-y-2">{items.map((i) => (<li key={i} className="flex gap-3 text-slate2"><span className="text-brand">✓</span>{i}</li>))}</ul>
+                </li>))}
+            </ol>
           </div>
         </section>
 
-        {/* Blogs */}
-        <section id="Blogs" className="mx-auto max-w-7xl px-5 py-20 lg:py-28">
+        {/* EARLY PARTNERS */}
+        <section id="stories" className="bg-ink py-20 text-white lg:py-28">
+          <div className="mx-auto max-w-3xl px-5 text-center">
+            <h2 className="font-display text-4xl font-semibold sm:text-5xl">Help shape OneRxiv</h2>
+            <p className="mx-auto mt-5 max-w-xl text-lg text-white/80">We’re opening to our first hospitals, insurance companies and practices. Early partners work directly with our team and influence what we build next.</p>
+            <div className="mt-8 flex flex-wrap justify-center gap-3"><Btn href="/contact">Become an early partner</Btn></div>
+          </div>
+        </section>
+
+        {/* BLOGS */}
+        <section id="blogs" className="mx-auto max-w-7xl px-5 py-20 lg:py-28">
           <h2 className="font-display text-4xl font-semibold sm:text-5xl">Stay updated with our latest insights</h2>
           <ul className="mt-10 grid gap-5 md:grid-cols-3">
-            {ARTICLES.map(([t, d]) => (<li key={t}><a href="#" className="block h-full rounded-3xl bg-blush-50 p-7 hover:bg-blush-100"><div className="mb-6 aspect-video rounded-2xl bg-gradient-to-br from-blush-200 to-white" /><h3 className="text-lg font-semibold">{t}</h3><p className="mt-2 text-slate2">{d}</p></a></li>))}
+            {POSTS.map((p) => (<li key={p.slug}><a href={`/blogs/${p.slug}`} className="block h-full rounded-3xl bg-blush-50 p-7 hover:bg-blush-100"><div className="mb-6 aspect-video rounded-2xl bg-gradient-to-br from-blush-200 to-white" /><h3 className="text-lg font-semibold">{p.title}</h3><p className="mt-2 text-slate2">{p.excerpt}</p></a></li>))}
           </ul>
         </section>
 
