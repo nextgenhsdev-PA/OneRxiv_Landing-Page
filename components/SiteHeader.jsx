@@ -6,13 +6,14 @@ import { PRODUCTS } from '../lib/content';
 import { ALL_FAQ } from '../lib/faq';
 import { PRODUCT_PAGES } from '../lib/products';
 import { AUDIENCES } from '../lib/audiences';
+import { SPECIALTIES } from '../lib/specialties';
 
 // Set to null to hide the bar.
 const ANNOUNCE = { text: 'Now onboarding our first hospitals, insurers and practices.', cta: 'Become an early partner', href: '/contact' };
 
-const FOR = AUDIENCES.map((a) => [a.title, `/${a.slug}`, a.menu]);
+const FOR = [...AUDIENCES.map((a) => [a.title, `/${a.slug}`, a.menu]), ...SPECIALTIES.map((s) => [s.title, `/specialties/${s.slug}`, s.menu])];
 const NAV = [['About', '/#about'], ['Solutions', '/#solutions'], ['How it works', '/#journey'], ['AI', '/#ai'], ['Blogs', '/blogs'], ['Pricing', '/pricing']];
-const MORE = [['Customers', '/#stories'], ['Help center', '/help-center'], ['Support', '/support'], ['Contact', '/contact'], ['Sign in', '/login']];
+const MORE = [['Customers', '/#stories'], ['Help center', '/help-center'], ['Support', '/support'], ['Contact', '/contact'], ['Client sign in', '/login']];
 
 const Menu = ({ label, items }) => (
   <div className="group relative">
@@ -29,6 +30,12 @@ export default function SiteHeader() {
   const products = PRODUCT_PAGES.map((p) => [p.name, `/products/${p.slug}`, p.short]);
   return (
     <>
+      <div className="bg-blush-50 px-5 py-1.5 text-xs text-slate2">
+        <div className="mx-auto flex max-w-7xl items-center justify-between gap-4">
+          <Link href="/help-center" className="hover:text-brand">Patient? Here’s how to reach your clinic</Link>
+          <span className="flex shrink-0 gap-4"><Link href="/support" className="hover:text-brand">Support</Link><Link href="/login" className="font-medium text-ink hover:text-brand">Client sign in</Link></span>
+        </div>
+      </div>
       {ANNOUNCE && (
         <div className="bg-ink px-5 py-2.5 text-center text-sm text-white">
           {ANNOUNCE.text} <Link href={ANNOUNCE.href} className="ml-1 font-medium text-blush-300 underline underline-offset-2">{ANNOUNCE.cta}</Link>
@@ -44,7 +51,6 @@ export default function SiteHeader() {
           </nav>
           <div className="flex items-center gap-2 sm:gap-3">
             <CommandPalette products={PRODUCTS} faqs={ALL_FAQ} />
-            <Link href="/login" className="hidden text-sm hover:text-brand lg:block">Sign in</Link>
             <span className="hidden md:block"><Btn href="/contact">Schedule a demo</Btn></span>
             <MobileMenu links={[...FOR.map(([n, h]) => [n, h]), ...NAV, ...MORE]} />
           </div>

@@ -4,7 +4,7 @@ import NewsletterForm from './NewsletterForm';
 import { CONTACT, SOCIAL } from '../lib/content';
 
 const COLS = [
-  ['Who it’s for', [['Hospitals', '/hospitals'], ['Insurance companies', '/insurers'], ['Private practitioners', '/practitioners']]],
+  ['Who it’s for', [['Hospitals', '/hospitals'], ['Insurance companies', '/insurers'], ['Private practitioners', '/practitioners'], ['Primary care', '/specialties/primary-care'], ['Behavioral health', '/specialties/behavioral-health'], ['Pain and spine', '/specialties/pain-and-spine']]],
   ['Company', [['About', '/#about'], ['Contact', '/contact'], ['Support', '/support'], ['Careers', '#']]],
   ['Learn', [['Blogs', '/blogs'], ['Help center', '/help-center'], ['Pricing', '/pricing'], ['Time savings calculator', '/roi'], ['Security and trust', '/security']]],
   ['Legal', [['Privacy', '/privacy'], ['Terms', '/terms']]],

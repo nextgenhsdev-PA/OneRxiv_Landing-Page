@@ -48,6 +48,12 @@ const ARTICLES = [
 
 
 
+const SUPPORT = [
+  ['Onboarding', 'We map your workflows, plan any data migration and set up your team before go-live.'],
+  ['Training', 'Hands-on sessions for each role, so everyone learns what they actually use.'],
+  ['Ongoing support', 'A help center for quick answers and a team you can reach when you need a person.'],
+];
+
 export default function Home() {
   return (
     <>
@@ -61,7 +67,7 @@ export default function Home() {
               One patient.<br />One record.<br /><span className="text-brand">One ecosystem.</span>
             </h1>
             <p className="mt-6 max-w-xl text-lg text-slate2">OneRxiv brings your EHR, telemedicine, billing and AI documentation into a single closed loop, so your team spends its day on patients, not on software.</p>
-            <div className="mt-8 flex flex-wrap gap-3"><Btn href="/contact">Schedule a demo</Btn><Btn href="/contact" ghost>Chat with sales</Btn></div>
+            <div className="mt-8 flex flex-wrap gap-3"><Btn href="/contact">Schedule a demo</Btn><Btn href="/#journey" ghost>See how it works</Btn></div>
             <HeroAsk />
             <p className="mt-6 text-sm text-slate2">Built for primary care, behavioral health, pain and spine, and multi-location groups.</p>
           </div>
@@ -185,6 +191,16 @@ export default function Home() {
           </div>
         </section>
 
+        {/* ONBOARDING AND SUPPORT */}
+        <section className="mx-auto max-w-7xl px-5 py-20 lg:py-28">
+          <h2 className="max-w-2xl font-display text-4xl font-semibold sm:text-5xl">You’re not on your own</h2>
+          <p className="mb-10 mt-4 max-w-xl text-lg text-slate2">From the first call to every day after go-live, a real team is behind you.</p>
+          <ul className="grid gap-5 md:grid-cols-3">
+            {SUPPORT.map(([t, d]) => (<li key={t} className="rounded-3xl border border-blush-200 p-7"><h3 className="text-xl font-semibold">{t}</h3><p className="mt-2 text-slate2">{d}</p></li>))}
+          </ul>
+          <div className="mt-8 flex flex-wrap gap-6 font-medium text-brand"><a href="/help-center" className="hover:underline">Browse the help center</a><a href="/support" className="hover:underline">Contact support</a></div>
+        </section>
+
         {/* EARLY PARTNERS */}
         <section id="stories" className="bg-ink py-20 text-white lg:py-28">
           <div className="mx-auto max-w-3xl px-5 text-center">
@@ -198,8 +214,9 @@ export default function Home() {
         <section id="blogs" className="mx-auto max-w-7xl px-5 py-20 lg:py-28">
           <h2 className="font-display text-4xl font-semibold sm:text-5xl">Stay updated with our latest insights</h2>
           <ul className="mt-10 grid gap-5 md:grid-cols-3">
-            {POSTS.map((p) => (<li key={p.slug}><a href={`/blogs/${p.slug}`} className="block h-full rounded-3xl bg-blush-50 p-7 hover:bg-blush-100"><div className="mb-6 aspect-video rounded-2xl bg-gradient-to-br from-blush-200 to-white" /><h3 className="text-lg font-semibold">{p.title}</h3><p className="mt-2 text-slate2">{p.excerpt}</p></a></li>))}
+            {POSTS.slice(0, 3).map((p) => (<li key={p.slug}><a href={`/blogs/${p.slug}`} className="block h-full rounded-3xl bg-blush-50 p-7 hover:bg-blush-100"><div className="mb-6 aspect-video rounded-2xl bg-gradient-to-br from-blush-200 to-white" /><h3 className="text-lg font-semibold">{p.title}</h3><p className="mt-2 text-slate2">{p.excerpt}</p></a></li>))}
           </ul>
+          <a href="/blogs" className="mt-8 inline-block font-medium text-brand hover:underline">View all posts</a>
         </section>
 
         {/* FAQ */}
@@ -208,12 +225,15 @@ export default function Home() {
           <div className="mt-8"><FaqSection homeOnly /></div>
         </section>
 
-        {/* CTA */}
-        <section className="bg-gradient-to-br from-blush-100 to-blush-200 py-20 text-center lg:py-28">
-          <div className="mx-auto max-w-3xl px-5">
-            <h2 className="font-display text-4xl font-semibold sm:text-5xl">See OneRxiv run your practice</h2>
-            <p className="mx-auto mt-4 max-w-md text-lg text-ink/70">A 30-minute walkthrough tailored to your organization. No obligation.</p>
-            <div className="mt-8 flex flex-wrap justify-center gap-3"><Btn href="/contact">Contact our team</Btn><Btn href={`mailto:${CONTACT.email}`} ghost>{CONTACT.email}</Btn></div>
+        {/* CLOSING: TWO PATHS */}
+        <section className="bg-gradient-to-br from-blush-100 to-blush-200 py-20 lg:py-28">
+          <div className="mx-auto max-w-5xl px-5">
+            <h2 className="text-center font-display text-4xl font-semibold sm:text-5xl">Let us help you</h2>
+            <div className="mt-10 grid gap-5 md:grid-cols-2">
+              <div className="flex flex-col rounded-3xl bg-white p-8"><h3 className="text-2xl font-semibold">Get a personalized demo</h3><p className="mb-6 mt-2 flex-1 text-slate2">Tell us about your organization and we will schedule a short walkthrough.</p><div><Btn href="/contact">Schedule a demo</Btn></div></div>
+              <div className="flex flex-col rounded-3xl bg-white p-8"><h3 className="text-2xl font-semibold">See what your team could get back</h3><p className="mb-6 mt-2 flex-1 text-slate2">Estimate the documentation time you could free up, using your own numbers.</p><div><Btn href="/roi" ghost>Open the calculator</Btn></div></div>
+            </div>
+            <p className="mt-8 text-center text-sm text-ink/70">Or email us at <a href={`mailto:${CONTACT.email}`} className="font-medium text-brand hover:underline">{CONTACT.email}</a></p>
           </div>
         </section>
       </main>

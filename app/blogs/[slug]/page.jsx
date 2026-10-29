@@ -22,7 +22,7 @@ export default function Post({ params }) {
       <main id="main" className="mx-auto max-w-2xl px-5 py-16 lg:py-24">
         <Link href="/blogs" className="text-sm text-brand hover:underline">Back to all posts</Link>
         <h1 className="mt-4 font-display text-4xl font-semibold leading-tight sm:text-5xl">{p.title}</h1>
-        <p className="mt-3 text-sm text-slate2">OneRxiv team · {p.read}</p>
+        <p className="mt-3 text-sm text-slate2">{p.category} · OneRxiv team · {p.read}</p>
         <div className="mt-8 space-y-5 text-lg leading-relaxed">{p.body.map((t) => <p key={t}>{t}</p>)}</div>
         <div className="mt-12 rounded-3xl bg-blush-50 p-8 text-center">
           <p className="font-display text-2xl font-semibold">Want to see this in your own workflow?</p>
