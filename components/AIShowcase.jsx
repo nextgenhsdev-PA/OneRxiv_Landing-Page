@@ -3,15 +3,18 @@ import { useEffect, useState } from 'react';
 
 // Sample scenes only: illustrative, not real patient data.
 const SCENES = [
-  { id: 'Clinical AI', title: 'Ambient charting', blurb: 'Listens to the visit and drafts a structured note. You review, edit and sign.', stat: 'Up to 2.5 hrs saved per day*',
+  { id: 'Clinical AI', title: 'Ambient charting', blurb: 'Listens to the visit and drafts a structured note. You review, edit and sign.', stat: 'Notes drafted while you talk',
     bubbles: [['Clinician', 'How’s everything been? Are you still tender in the palm area?'], ['Patient', 'Yes, mostly when I grip things in the morning.'], ['Clinician', 'Let’s check range of motion and plan from there.']],
     result: { title: 'Draft note ready', rows: [['Subjective', 'Morning palm tenderness with gripping'], ['Objective', 'Range of motion assessed'], ['Plan', 'Reassess grip strength; follow-up in 2 weeks']], cta: 'Review and sign' } },
-  { id: 'Intelligent Agent', title: 'Always-on agent', blurb: 'Voice or text handles scheduling, chart lookups and billing questions around the clock.', stat: 'Available 24/7',
+  { id: 'Intelligent Agent', title: 'Always-on agent', blurb: 'Voice or text handles scheduling, chart lookups and billing questions around the clock.', stat: 'Ready whenever you are',
     bubbles: [['You', 'Move Nguyen’s 10:15 to Thursday afternoon.'], ['Agent', 'Thursday has 2:30 and 4:00 open. Which works?'], ['You', '2:30, and send her a reminder.']],
     result: { title: 'Done', rows: [['Appointment', 'Moved to Thursday, 2:30 PM'], ['Reminder', 'Scheduled for Wednesday'], ['Chart', 'Updated automatically']], cta: 'View schedule' } },
-  { id: 'Coding assist', title: 'Coding and billing assist', blurb: 'Suggests codes from the note so claims go out cleaner, with a human always in control.', stat: 'Fewer denials, faster payment*',
+  { id: 'Coding assist', title: 'Coding and billing assist', blurb: 'Suggests codes from the note so claims go out cleaner, with a human always in control.', stat: 'Cleaner claims, with a human in control',
     bubbles: [['Note', 'Pain in right hand, grip assessed, follow-up planned.'], ['AI', 'Found documentation to support a diagnosis and visit level.'], ['AI', 'One gap: laterality unclear. Confirm before submitting.']],
     result: { title: 'Claim check', rows: [['Diagnosis', 'Suggested from note'], ['Visit level', 'Suggested, pending review'], ['Flag', '1 item needs your confirmation']], cta: 'Resolve and submit' } },
+  { id: 'Clinical evidence', title: 'Clinical evidence search', blurb: 'Ask a clinical question and get recent sources for the clinician to check.', stat: 'Sources listed for your review',
+    bubbles: [['Clinician', 'Show recent guideline updates for adult hypertension.'], ['AI', 'Found recent guideline summaries and review articles.'], ['AI', 'Sources are listed so you can check each one.']],
+    result: { title: 'Evidence summary', rows: [['Question', 'Recent guideline updates'], ['Sources', 'Listed with links'], ['Status', 'For clinician review']], cta: 'Review sources' } },
   { id: 'Patient inbox', title: 'Patient messaging', blurb: 'Drafts replies to routine messages in your voice, and routes anything clinical to you.', stat: 'Stay connected beyond the visit',
     bubbles: [['Patient', 'Can I refill my prescription before my trip?'], ['AI', 'Routine refill request detected. Draft reply prepared.'], ['AI', 'Routed to Dr. Patel for approval.']],
     result: { title: 'Reply drafted', rows: [['Type', 'Refill request'], ['Status', 'Awaiting clinician approval'], ['Patient', 'Notified once approved']], cta: 'Approve and send' } },

@@ -2,7 +2,8 @@ import Link from 'next/link';
 import CommandPalette from './CommandPalette';
 import MobileMenu from './MobileMenu';
 import { Btn, Wordmark } from './ui';
-import { PRODUCTS, FAQ } from '../lib/content';
+import { PRODUCTS } from '../lib/content';
+import { ALL_FAQ } from '../lib/faq';
 import { PRODUCT_PAGES } from '../lib/products';
 import { AUDIENCES } from '../lib/audiences';
 
@@ -10,7 +11,8 @@ import { AUDIENCES } from '../lib/audiences';
 const ANNOUNCE = { text: 'Now onboarding our first hospitals, insurers and practices.', cta: 'Become an early partner', href: '/contact' };
 
 const FOR = AUDIENCES.map((a) => [a.title, `/${a.slug}`, a.menu]);
-const NAV = [['About', '/#about'], ['Solutions', '/#solutions'], ['How it works', '/#journey'], ['AI', '/#ai'], ['Customers', '/#stories'], ['Blogs', '/blogs'], ['Contact', '/contact']];
+const NAV = [['About', '/#about'], ['Solutions', '/#solutions'], ['How it works', '/#journey'], ['AI', '/#ai'], ['Blogs', '/blogs'], ['Pricing', '/pricing']];
+const MORE = [['Customers', '/#stories'], ['Help center', '/help-center'], ['Support', '/support'], ['Contact', '/contact'], ['Sign in', '/login']];
 
 const Menu = ({ label, items }) => (
   <div className="group relative">
@@ -41,9 +43,10 @@ export default function SiteHeader() {
             {NAV.map(([l, h]) => (<Link key={l} href={h} className="hover:text-brand">{l}</Link>))}
           </nav>
           <div className="flex items-center gap-2 sm:gap-3">
-            <CommandPalette products={PRODUCTS} faqs={FAQ} />
+            <CommandPalette products={PRODUCTS} faqs={ALL_FAQ} />
+            <Link href="/login" className="hidden text-sm hover:text-brand lg:block">Sign in</Link>
             <span className="hidden md:block"><Btn href="/contact">Schedule a demo</Btn></span>
-            <MobileMenu links={[...FOR.map(([n, h]) => [n, h]), ...NAV]} />
+            <MobileMenu links={[...FOR.map(([n, h]) => [n, h]), ...NAV, ...MORE]} />
           </div>
         </div>
       </header>

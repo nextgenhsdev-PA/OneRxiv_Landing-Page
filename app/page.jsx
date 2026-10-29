@@ -11,6 +11,7 @@ import SiteHeader from '../components/SiteHeader';
 import SiteFooter from '../components/SiteFooter';
 import { Btn } from '../components/ui';
 import AgentRoster from '../components/AgentRoster';
+import FaqSection from '../components/FaqSection';
 import { POSTS } from '../lib/posts';
 import { slugOf } from '../lib/products';
 import { PRODUCTS, FAQ, CONTACT } from '../lib/content';
@@ -204,9 +205,7 @@ export default function Home() {
         {/* FAQ */}
         <section id="faq" className="mx-auto max-w-3xl px-5 pb-20 lg:pb-28">
           <h2 className="font-display text-4xl font-semibold">Questions practices ask us</h2>
-          <div className="mt-8 divide-y divide-blush-200 border-y border-blush-200">
-            {FAQ.map(([q, a]) => (<details key={q} className="group py-5"><summary className="flex cursor-pointer list-none justify-between gap-4 text-lg font-medium">{q}<span className="text-brand transition group-open:rotate-45">+</span></summary><p className="mt-3 text-slate2">{a}</p></details>))}
-          </div>
+          <div className="mt-8"><FaqSection homeOnly /></div>
         </section>
 
         {/* CTA */}
